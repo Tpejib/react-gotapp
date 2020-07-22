@@ -6,15 +6,19 @@ import ErrorMessage from '../errorMessage'
 
 export default class RandomChar extends Component {
 
-    constructor() {
-        super();
-        this.updateCharacter();
-    }
-
     gotService = new gotService()
     state = {
         char: {},
         loading: true
+    }
+
+    componentDidMount() {
+        this.timerId = setInterval(this.updateCharacter, 4000);
+        
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerId);
     }
 
     onCharLoaded = (char) => {
@@ -32,7 +36,7 @@ export default class RandomChar extends Component {
         })
     }
 
-    updateCharacter() {
+    updateCharacter = () => {
         const id = Math.floor(Math.random()*140 + 1);
         this.gotService.getCharacter(id)
             .then(this.onCharLoaded)
@@ -64,19 +68,19 @@ const View = ({char}) => {
         <ul className="list-group list-group-flush">
             <li className="list-group-item d-flex justify-content-between">
                 <span className="term">Gender </span>
-                <span>{gender}</span>
+                <span>{gender ? gender : '(no data)'}</span>
             </li>
             <li className="list-group-item d-flex justify-content-between">
                 <span className="term">Born </span>
-                <span>{born}</span>
+                <span>{born ? born : '(no data)'}</span>
             </li>
             <li className="list-group-item d-flex justify-content-between">
                 <span className="term">Died </span>
-                <span>{died}</span>
+                <span>{died ? died : '(no data)'}</span>
             </li>
             <li className="list-group-item d-flex justify-content-between">
                 <span className="term">Culture </span>
-                <span>{culture}</span>
+                <span>{culture ? culture : '(no data)'}</span>
             </li>
         </ul>
         </>

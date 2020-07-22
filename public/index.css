@@ -14,3 +14,7 @@ body {
     font-size: 16px;
     height: 100%;	
 }
+
+.btn {
+    margin-bottom: 40px;
+}

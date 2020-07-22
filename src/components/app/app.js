@@ -8,7 +8,8 @@ import CharDetails from '../charDetails';
 
 export default class App extends React.Component {
     state = {
-        randomChar: true
+        randomChar: true,
+        selectedChar: 130
     }
 
     toggleRandomChar = () => {
@@ -16,6 +17,12 @@ export default class App extends React.Component {
             return {
                 randomChar: !state.randomChar
             }
+        })
+    }
+
+    onCharSelected = (id) => {
+        this.setState({
+            selectedChar: id
         })
     }
 
@@ -35,10 +42,12 @@ export default class App extends React.Component {
                     </Row>
                     <Row>
                         <Col md='6'>
-                            <ItemList />
+                            <ItemList
+                                onCharSelected={this.onCharSelected}    
+                            />
                         </Col>
                         <Col md='6'>
-                            <CharDetails />
+                            <CharDetails charId={this.state.selectedChar} />
                         </Col>
                     </Row>
                 </Container>
