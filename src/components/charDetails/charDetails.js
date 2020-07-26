@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './charDetails.css';
 import gotService from '../../services/gotService'
-import Spinner from '../spinner'
 
 export default class CharDetails extends Component {
 
